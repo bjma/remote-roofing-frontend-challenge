@@ -11,7 +11,7 @@ const Series = () => {
     }]);
 
     // Loading state
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(0);
 
     // componentWillMount
     useEffect(() => {
@@ -23,17 +23,21 @@ const Series = () => {
      * and a releaseYear >= 2010
      */
     const fetchSeries = async () => {
-        const response = await fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json');
-        const data = await response.json();
-        //console.log(data.entries); 
-        data.entries.forEach((element) => {
-            if (element.programType === 'series' && element.releaseYear >= 2010) {
-                setItems(prevItems => {
-                    return [{title: element.title, imageUrl: element.images['Poster Art'].url}, ...prevItems]
-                })
-            }
-        });
-        setLoading(false);
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json');
+            const data = await response.json();
+            //console.log(data.entries); 
+            data.entries.forEach((element) => {
+                if (element.programType === 'series' && element.releaseYear >= 2010) {
+                    setItems(prevItems => {
+                        return [{title: element.title, imageUrl: element.images['Poster Art'].url}, ...prevItems]
+                    })
+                }
+            });
+            setLoading(1);
+        } catch (err) {
+            setLoading(2)
+        }
     };
 
     /**
@@ -54,20 +58,27 @@ const Series = () => {
     }
 
     switch(isLoading) {
-        case true:
+        case 0:
             return (
                 <div>
                     <Header pageTitle={'Popular Series'}/>
                     <p>Loading...</p>
                 </div>
             );
-        case false:
+        case 1:
             return (
                 <div>
                     {sortItems(items)}
                     <Header pageTitle={'Popular Series'}/>
                     <Item title={items[0].title} imageUrl={items[0].imageUrl} />
                     {console.log(items)}
+                </div>
+            );
+        case 2:
+            return (
+                <div>
+                    <Header pageTitle={'Popular Series'}/>
+                    <p>Oops, something went wrong...</p>
                 </div>
             );
     }
