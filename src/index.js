@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+/* React Router stuff */
+import { render } from 'react-dom';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
