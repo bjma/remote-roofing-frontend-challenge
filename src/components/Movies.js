@@ -10,6 +10,9 @@ const Movies = () => {
         imageUrl: '',
     }]);
 
+    // Loading state
+    const [isLoading, setLoading] = useState(true);
+
     // componentWillMount
     useEffect(() => {
         fetchMovies();
@@ -29,15 +32,45 @@ const Movies = () => {
                 })
             }
         });
+        setLoading(false);
     };
 
+    /**
+     * Sorts all items alphabetically by title
+     * @param {Object} items 
+     */
+    const sortItems = (items) => {
+        items.sort((a, b) => {
+            if (a.title[0] < b.title[0]) {
+                return -1;
+            }
+    
+            if (a.title[0] > b.title[0]) {
+                return 1;
+            }
+            return 0;
+        });
+    }
 
-    return (
-        <div>
-            <Header pageTitle={'Popular Movies'}/>
-            {console.log('movies', items[0].imageUrl)}
-        </div>
-    );
+
+    switch(isLoading) {
+        case true:
+            return (
+                <div>
+                    <Header pageTitle={'Popular Movies'}/>
+                    <p>Loading...</p>
+                </div>
+            );
+        case false:
+            return (
+                <div>
+                    {sortItems(items)}
+                    <Header pageTitle={'Popular Movies'}/>
+                    <Item title={items[0].title} imageUrl={items[0].imageUrl} />
+                    {console.log(items)}
+                </div>
+            );
+    }
 }
 
 export default Movies;
