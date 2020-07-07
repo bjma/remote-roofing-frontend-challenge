@@ -10,7 +10,7 @@ const Series = () => {
         imageUrl: '',
     }]);
 
-    // Loading state
+    // Loading state; 0 for true, 1 for false, 2 for error
     const [isLoading, setLoading] = useState(0);
 
     // componentWillMount
@@ -36,7 +36,7 @@ const Series = () => {
             });
             setLoading(1);
         } catch (err) {
-            setLoading(2)
+            setLoading(2);
         }
     };
 
@@ -70,7 +70,7 @@ const Series = () => {
                 <div>
                     {sortItems(items)}
                     <Header pageTitle={'Popular Series'}/>
-                    <Item title={items[0].title} imageUrl={items[0].imageUrl} />
+                    <Item title={items[1].title} imageUrl={items[1].imageUrl} />
                     {console.log(items)}
                 </div>
             );

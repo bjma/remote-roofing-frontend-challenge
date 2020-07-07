@@ -10,7 +10,7 @@ const Movies = () => {
         imageUrl: '',
     }]);
 
-    // Loading state
+    // Loading state; 0 for true, 1 for false, 2 for error
     const [isLoading, setLoading] = useState(0);
 
     // componentWillMount
