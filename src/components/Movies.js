@@ -22,8 +22,15 @@ const Movies = () => {
     const fetchMovies = async () => {
         const response = await fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json');
         const data = await response.json();
-        console.log(data);
-    }
+        //console.log(data.entries);
+        let arr = []
+        data.entries.forEach((element) => {
+            if (element.programType === 'movie' && element.releaseYear >= 2010) {
+                arr.push(element);
+            }
+        })
+        console.log(arr);
+    };
 
 
     return (
