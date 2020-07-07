@@ -10,8 +10,8 @@ const Home = () => {
     return (
         <div>
             <Header pageTitle={'Popular Titles'}/>
-            <Link to='/movies'>Movies</Link>
             <Link to='/series'>Series</Link>
+            <Link to='/movies'>Movies</Link>
         </div>
     );
 }
