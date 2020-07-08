@@ -6,6 +6,7 @@ import { Container, Row } from 'react-bootstrap';
 // import component modules
 import Header from './Header';
 import Item from './Item';
+import Footer from './Footer'
 
 const Movies = () => {
     const [items, setItems] = useState([{
@@ -88,6 +89,7 @@ const Movies = () => {
                 <div>
                     <Header pageTitle={'Popular Movies'}/>
                     <p>Loading...</p>
+                    <Footer />
                 </div>
             );
         case 1:
@@ -98,7 +100,7 @@ const Movies = () => {
                     <Container style={styles.contentWrapper}>
                         {displayItems(items)}
                     </Container>
-                    {console.log(items)}
+                    <Footer />
                 </div>
             );
         case 2:
@@ -106,6 +108,7 @@ const Movies = () => {
                 <div>
                     <Header pageTitle={'Popular Movies'}/>
                     <p>Oops, something went wrong...</p>
+                    <Footer />
                 </div>
             );
     }

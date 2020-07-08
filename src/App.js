@@ -20,6 +20,7 @@ const App = () => {
                     <button style={styles.trialButton} href='https://remoteroofing.com/'>Start your free trial</button>
                 </div>
             </nav>
+
             <Router>
                 <Switch>
                     <Route path='/' exact component={Home} />

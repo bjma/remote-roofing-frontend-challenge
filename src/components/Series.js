@@ -6,6 +6,7 @@ import { Container, Row } from 'react-bootstrap';
 // import component modules
 import Header from './Header';
 import Item from './Item';
+import Footer from './Footer'
 
 const Series = () => {
     const [items, setItems] = useState([{
@@ -29,7 +30,6 @@ const Series = () => {
         try {
             const response = await fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json');
             const data = await response.json();
-            console.log(data); 
             data.entries.forEach((element) => {
                 if (element.programType === 'series' && element.releaseYear >= 2010) {
                     setItems(prevItems => {
@@ -88,6 +88,7 @@ const Series = () => {
                 <div>
                     <Header pageTitle={'Popular Series'}/>
                     <p>Loading...</p>
+                    <Footer />
                 </div>
             );
         case 1:
@@ -98,6 +99,7 @@ const Series = () => {
                     <Container style={styles.contentWrapper}>
                         {displayItems(items)}
                     </Container>
+                    <Footer />
                 </div>
             );
         case 2:
@@ -105,6 +107,7 @@ const Series = () => {
                 <div>
                     <Header pageTitle={'Popular Series'}/>
                     <p>Oops, something went wrong...</p>
+                    <Footer />
                 </div>
             );
     }
