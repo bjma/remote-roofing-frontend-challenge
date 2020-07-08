@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+// import libraries
+import { Container, Row } from 'react-bootstrap';
+
 // import component modules
 import Header from './Header';
 import Item from './Item';
@@ -26,7 +29,7 @@ const Series = () => {
         try {
             const response = await fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json');
             const data = await response.json();
-            //console.log(data.entries); 
+            console.log(data); 
             data.entries.forEach((element) => {
                 if (element.programType === 'series' && element.releaseYear >= 2010) {
                     setItems(prevItems => {
@@ -55,7 +58,29 @@ const Series = () => {
             }
             return 0;
         });
-    }
+    };
+
+    /**
+     * Displays the first 21 items in 3 rows with 7 columns
+     * Source: https://stackoverflow.com/questions/42391499/react-render-new-row-every-4th-column
+     * @param {*} items 
+     */
+    const displayItems = (items) => {
+        // Create an empty array of 3 rows, since we're rendering the first 21 items only
+        const rows = [...Array(3)];
+        // Map 7 items into each row
+        const itemRows = rows.map((row, index) => items.slice(index * 7, index * 7 + 7));
+        // Map rows as Row components
+        const content = itemRows.map((row, index) => (
+            <Row key={index}>
+                {row.map((item) => (
+                    <Item title={item.title} imageUrl={item.imageUrl} />
+                ))}
+            </Row>
+        ));
+        //console.log(rows);
+        return content;
+    };
 
     switch(isLoading) {
         case 0:
@@ -70,8 +95,9 @@ const Series = () => {
                 <div>
                     {sortItems(items)}
                     <Header pageTitle={'Popular Series'}/>
-                    <Item title={items[1].title} imageUrl={items[1].imageUrl} />
-                    {console.log(items)}
+                    <Container style={styles.contentWrapper}>
+                        {displayItems(items)}
+                    </Container>
                 </div>
             );
         case 2:
@@ -82,6 +108,16 @@ const Series = () => {
                 </div>
             );
     }
+}
+
+const styles = {
+    contentWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'spaceAround',
+        marginTop: 40,
+    },
 }
 
 export default Series;

@@ -11,20 +11,14 @@ import Movies from './components/Movies';
 import Series from './components/Series';
 
 const App = () => {
-    const styles = {
-        /* Layout */
-        padding: 15,
-        /* Styles */
-        backgroundColor: '#449FFA',
-        color: '#FFFFFF',
-    };
-
     return (
         <div>
-            <nav style={styles} class='navbar'>
-                <a href='http://localhost:3000/'>DEMO Streaming </a>
-                <button href='https://remoteroofing.com/'>Login</button>
-                <button href='https://remoteroofing.com/'>Start your free trial</button>
+            <nav style={styles.navBar}>
+                <a href='http://localhost:3000/' style={{color:'#FFFFFF', fontSize:24, textDecoration:'none'}}>DEMO Streaming </a>
+                <div style={{float: 'right',}}>
+                    <button style={styles.loginButton} href='https://remoteroofing.com/'>Login</button>
+                    <button style={styles.trialButton} href='https://remoteroofing.com/'>Start your free trial</button>
+                </div>
             </nav>
             <Router>
                 <Switch>
@@ -36,5 +30,29 @@ const App = () => {
         </div>
     );
 }
+
+const styles = {
+    navBar: {
+        /* Layout */
+        padding: 15,
+        /* Styles */
+        backgroundColor: '#449FFA',
+        color: '#FFFFFF',
+    },
+
+    loginButton: {
+        backgroundColor: '#449FFA',
+        border: 'none',
+        color: '#FFFFFF',
+        marginRight: 15,
+    },
+
+    trialButton: {
+        backgroundColor: '#57595B',
+        border: 'none',
+        color: '#FFFFFF',
+        padding: 5,
+    },
+};
 
 export default App;

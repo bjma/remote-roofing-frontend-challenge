@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+// import libraries
+import { Container, Row } from 'react-bootstrap';
+
 // import component modules
 import Header from './Header';
 import Item from './Item';
@@ -54,7 +57,29 @@ const Movies = () => {
             }
             return 0;
         });
-    }
+    };
+
+    /**
+     * Displays the first 21 items in 3 rows with 7 columns
+     * Source: https://stackoverflow.com/questions/42391499/react-render-new-row-every-4th-column
+     * @param {*} items 
+     */
+    const displayItems = (items) => {
+        // Create an array of 3 rows, since we're rendering the first 21 items only
+        const rows = [...Array(3)];
+        // Map 7 items into each row
+        const itemRows = rows.map((row, index) => items.slice(index * 7, index * 7 + 7));
+        // Map rows as Row components
+        const content = itemRows.map((row, index) => (
+            <Row key={index}>
+                {row.map((item) => (
+                    <Item title={item.title} imageUrl={item.imageUrl} />
+                ))}
+            </Row>
+        ));
+        //console.log(rows);
+        return content;
+    };
 
 
     switch(isLoading) {
@@ -70,7 +95,9 @@ const Movies = () => {
                 <div>
                     {sortItems(items)}
                     <Header pageTitle={'Popular Movies'}/>
-                    <Item title={items[0].title} imageUrl={items[0].imageUrl} />
+                    <Container style={styles.contentWrapper}>
+                        {displayItems(items)}
+                    </Container>
                     {console.log(items)}
                 </div>
             );
@@ -82,6 +109,16 @@ const Movies = () => {
                 </div>
             );
     }
+}
+
+const styles = {
+    contentWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'spaceAround',
+        marginTop: 40,
+    },
 }
 
 export default Movies;
