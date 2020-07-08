@@ -9,30 +9,30 @@ This was a small take-home project built with React that I did for [Remote Roofi
 As a prerequisite, make sure you have `create-react-app` installed.
 
 ``` bash
-> npm install -g create-react-app
+$ npm install -g create-react-app
 ```
 
 To view, first go to your preferred directory and clone the repo.
 ``` bash
-> git clone https://github.com/bjma/remote-roofing-frontend-challenge
+$ git clone https://github.com/bjma/remote-roofing-frontend-challenge
 ```
 
 Make sure to install all dependencies. To do this, first go to the project directory.
 
 ``` bash
-> cd remote-roofing-frontend-challenge
+$ cd remote-roofing-frontend-challenge
 ```
 
 Then, run the following command in the project directory.
 
 ``` bash
-> npm install
+$ npm install
 ```
 
 Now that everything is set up, run the following command to launch the project.
 
 ``` bash
-> npm start
+$ npm start
 ```
 
 You should be able to view it on `http://localhost:3000`.
